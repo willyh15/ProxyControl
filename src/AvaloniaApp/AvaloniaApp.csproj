@@ -3,22 +3,18 @@
   <PropertyGroup>
     <OutputType>WinExe</OutputType>
     <TargetFramework>net7.0</TargetFramework>
-    <RootNamespace>ProxyControlApp</RootNamespace>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>false</UseWPF>
+    <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.0" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
-    <PackageReference Include="Avalonia.Xaml.Interactions" Version="11.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-    <PackageReference Include="ReactiveUI" Version="18.3.1" />
     <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.0" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Page Include="MainWindow.xaml" />
-  </ItemGroup>
+  <PropertyGroup>
+    <AvaloniaXamlContext>true</AvaloniaXamlContext> <!-- Ensures XAML code generation -->
+  </PropertyGroup>
 
 </Project>
