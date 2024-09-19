@@ -2,9 +2,9 @@ using System;
 using System.IO;
 using System.Net;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json.Linq;
+using Avalonia.Controls;  // Correct namespace for 'Window'
 
 namespace ProxyControlApp
 {
@@ -45,6 +45,7 @@ namespace ProxyControlApp
 
             Console.WriteLine($"Connecting to proxy on port {proxyPort}...");
 
+            // Fetch the list of available proxies and connect
             var proxyList = await GetProxyList(apiUrl, apiKey);
             if (proxyList != null && proxyList.Count > 0)
             {
