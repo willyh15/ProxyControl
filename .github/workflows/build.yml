@@ -36,7 +36,7 @@ jobs:
           fi
 
       - name: Archive build artifacts
-        uses: actions/upload-artifact@v3  # Updated to v3
+        uses: actions/upload-artifact@v3
         with:
           name: AvaloniaApp-Build
           path: ./src/AvaloniaApp/bin/Release/net7.0/*
