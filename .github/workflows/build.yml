@@ -1,0 +1,52 @@
+name: .NET Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build-desktop:
+    name: Build Avalonia App (Desktop)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore ./src/AvaloniaApp
+
+      - name: Build Avalonia App
+        run: dotnet build ./src/AvaloniaApp --configuration Release --no-restore
+
+      - name: Run Unit Tests (if any)
+        run: dotnet test ./src/AvaloniaApp --no-build --verbosity normal
+
+  build-mobile:
+    name: Build MAUI App (Mobile)
+    runs-on: macos-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '7.0.x'
+
+      - name: Restore dependencies
+        run: dotnet restore ./src/MAUIApp
+
+      - name: Build MAUI App (Android)
+        run: dotnet build ./src/MAUIApp --configuration Release --no-restore
+
+      - name: Run Unit Tests (if any)
+        run: dotnet test ./src/MAUIApp --no-build --verbosity normal
