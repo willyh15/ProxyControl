@@ -5,4 +5,4 @@ MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaApp", "src/AvaloniaApp/AvaloniaApp.csproj", "{E04BC9D6-3771-4B72-B2D8-59A53D1784D9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MAUIApp", "src/MAUIApp/MAUIApp.csproj", "{E04BC9D6-3771-4B72-B2D8-59A53D1784E9}"
-EndProject
+EndProjec
