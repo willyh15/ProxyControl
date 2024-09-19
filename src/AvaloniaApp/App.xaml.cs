@@ -21,4 +21,3 @@ namespace ProxyControlApp
             base.OnFrameworkInitializationCompleted();
         }
     }
-}
