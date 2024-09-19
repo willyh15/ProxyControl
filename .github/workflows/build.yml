@@ -21,6 +21,9 @@ jobs:
         with:
           dotnet-version: '7.0.x'
 
+      - name: Clean Project
+        run: dotnet clean ./src/AvaloniaApp
+
       - name: Restore dependencies
         run: dotnet restore ./src/AvaloniaApp --verbosity minimal 2>&1 | tee restore-log.txt
 
@@ -51,6 +54,9 @@ jobs:
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
+
+      - name: Clean Project
+        run: dotnet clean ./src/MAUIApp
 
       - name: Restore dependencies
         run: dotnet restore ./src/MAUIApp --verbosity minimal 2>&1 | tee restore-log.txt
