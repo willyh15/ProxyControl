@@ -35,6 +35,12 @@ jobs:
             exit 1
           fi
 
+      - name: Archive build artifacts
+        uses: actions/upload-artifact@v2
+        with:
+          name: AvaloniaApp-Build
+          path: ./src/AvaloniaApp/bin/Release/net7.0/*
+
       - name: Run Unit Tests (if any)
         run: |
           dotnet test ./src/AvaloniaApp --no-build --verbosity minimal 2>&1 | tee test-log.txt
@@ -48,7 +54,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
