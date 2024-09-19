@@ -22,13 +22,23 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ./src/AvaloniaApp
+        run: dotnet restore ./src/AvaloniaApp --verbosity minimal 2>&1 | tee restore-log.txt
 
       - name: Build Avalonia App
-        run: dotnet build ./src/AvaloniaApp --configuration Release --no-restore
+        run: |
+          dotnet build ./src/AvaloniaApp --configuration Release --no-restore --verbosity minimal 2>&1 | tee build-log.txt
+          if [ $? -ne 0 ]; then
+            echo "Build failed. Check build-log.txt for details."
+            exit 1
+          fi
 
       - name: Run Unit Tests (if any)
-        run: dotnet test ./src/AvaloniaApp --no-build --verbosity normal
+        run: |
+          dotnet test ./src/AvaloniaApp --no-build --verbosity minimal 2>&1 | tee test-log.txt
+          if [ $? -ne 0 ]; then
+            echo "Unit tests failed. Check test-log.txt for details."
+            exit 1
+          fi
 
   build-mobile:
     name: Build MAUI App (Mobile)
@@ -43,10 +53,20 @@ jobs:
           dotnet-version: '7.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore ./src/MAUIApp
+        run: dotnet restore ./src/MAUIApp --verbosity minimal 2>&1 | tee restore-log.txt
 
       - name: Build MAUI App (Android)
-        run: dotnet build ./src/MAUIApp --configuration Release --no-restore
+        run: |
+          dotnet build ./src/MAUIApp --configuration Release --no-restore --verbosity minimal 2>&1 | tee build-log.txt
+          if [ $? -ne 0 ]; then
+            echo "Build failed. Check build-log.txt for details."
+            exit 1
+          fi
 
       - name: Run Unit Tests (if any)
-        run: dotnet test ./src/MAUIApp --no-build --verbosity normal
+        run: |
+          dotnet test ./src/MAUIApp --no-build --verbosity minimal 2>&1 | tee test-log.txt
+          if [ $? -ne 0 ]; then
+            echo "Unit tests failed. Check test-log.txt for details."
+            exit 1
+          fi
