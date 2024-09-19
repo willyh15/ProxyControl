@@ -49,4 +49,4 @@ jobs:
         run: dotnet build ./src/MAUIApp --configuration Release --no-restore
 
       - name: Run Unit Tests (if any)
-        run: dotnet test ./src/MAUIApp --no-build --verbosity norma
+        run: dotnet test ./src/MAUIApp --no-build --verbosity normal
