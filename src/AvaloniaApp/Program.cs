@@ -1,5 +1,4 @@
 using Avalonia;
-using Avalonia.Controls.ApplicationLifetimes;
 using Avalonia.ReactiveUI;
 using System;
 
@@ -12,8 +11,8 @@ namespace ProxyControlApp
 
         public static AppBuilder BuildAvaloniaApp() =>
             AppBuilder.Configure<App>()
-                .UsePlatformDetect()
-                .LogToTrace()
-                .UseReactiveUI();
+                      .UsePlatformDetect()
+                      .LogToTrace()
+                      .UseReactiveUI();
     }
 }
