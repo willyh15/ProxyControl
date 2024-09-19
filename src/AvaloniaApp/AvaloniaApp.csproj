@@ -21,6 +21,4 @@
     <Page Include="MainWindow.xaml" />
   </ItemGroup>
 
-  <Import Project="Sdk.targets" Sdk="Avalonia.Sdk" />
-
 </Project>
