@@ -16,4 +16,3 @@ namespace ProxyControlApp
                 .UsePlatformDetect()
                 .LogToTrace();
     }
-}
