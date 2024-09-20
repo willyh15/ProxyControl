@@ -12,45 +12,63 @@ jobs:
   build-desktop:
     name: Build Avalonia App (Desktop)
     runs-on: ubuntu-latest
+
     steps:
+      # Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
+      # Setup the .NET Core SDK version 7.0.x
       - name: Setup .NET Core SDK
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '7.0.x'
 
+      # Clean the AvaloniaApp project
       - name: Clean Project
         run: dotnet clean ./src/AvaloniaApp
 
+      # Restore the AvaloniaApp dependencies
       - name: Restore dependencies
         run: dotnet restore ./src/AvaloniaApp --verbosity minimal 2>&1 | tee restore-log.txt
 
+      # Build the Avalonia App with verbose logging for debugging
       - name: Build Avalonia App with Verbose Logging
         run: |
           dotnet build ./src/AvaloniaApp --configuration Release --no-restore --verbosity detailed 2>&1 | tee build-log.txt
+          
+          # Check if build failed
           if [ $? -ne 0 ]; then
             echo "Build failed. Check build-log.txt for details."
             exit 1
           fi
+
+          # Check if the build output directory exists
           echo "Checking output directory..."
-          ls -la ./src/AvaloniaApp/bin/Release/net7.0/
-          if [ $? -ne 0 ]; then
-            echo "Build output not found."
+          if [ ! -d "./src/AvaloniaApp/bin/Release/net7.0/" ]; then
+            echo "Build output directory not found."
             exit 1
+          else
+            echo "Build output directory found. Listing contents:"
+            ls -la ./src/AvaloniaApp/bin/Release/net7.0/
           fi
 
+      # Upload the build artifacts for AvaloniaApp
       - name: Archive build artifacts
         uses: actions/upload-artifact@v3
         with:
           name: AvaloniaApp-Build
-          path: ./src/AvaloniaApp/bin/Release/net7.0/*
+          path: |
+            ./src/AvaloniaApp/bin/Release/net7.0/*
+            ./src/AvaloniaApp/bin/Release/net6.0/*
           if-no-files-found: error
 
+      # Run any unit tests (if present) for AvaloniaApp
       - name: Run Unit Tests (if any)
         run: |
           dotnet test ./src/AvaloniaApp --no-build --verbosity minimal 2>&1 | tee test-log.txt
+          
+          # Check if tests failed
           if [ $? -ne 0 ]; then
             echo "Unit tests failed. Check test-log.txt for details."
             exit 1
