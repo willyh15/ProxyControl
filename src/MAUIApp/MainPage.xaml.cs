@@ -59,7 +59,7 @@ namespace ProxyControlApp
             }
         }
 
-        private async Task<JArray> GetProxyList(string apiUrl, string apiKey)
+        private async Task<JArray>? GetProxyList(string apiUrl, string apiKey)
         {
             try
             {
