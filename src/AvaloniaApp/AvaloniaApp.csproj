@@ -7,6 +7,15 @@
     <UseWindowsForms>false</UseWindowsForms>
   </PropertyGroup>
 
+
+  <ItemGroup>
+  <Page Include="MainWindow.xaml">
+    <Generator>MSBuild:Compile</Generator>
+    <SubType>Designer</SubType>
+  </Page>
+</ItemGroup>
+
+
   <ItemGroup>
     <PackageReference Include="Avalonia" Version="11.0.0" />
     <PackageReference Include="Avalonia.Desktop" Version="11.0.0" />
