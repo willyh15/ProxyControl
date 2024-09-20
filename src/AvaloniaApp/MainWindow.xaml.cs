@@ -63,7 +63,7 @@ namespace ProxyControlApp
                 string proxyIP = proxyList[0]["proxy_address"]?.ToString() ?? string.Empty;
                 string username = proxyList[0]["username"]?.ToString() ?? string.Empty;
                 string password = proxyList[0]["password"]?.ToString() ?? string.Empty;
-                
+
                 if (!string.IsNullOrEmpty(proxyIP) && !string.IsNullOrEmpty(username) && !string.IsNullOrEmpty(password))
                 {
                     await ConnectToProxy(proxyIP, proxyPort, username, password);
